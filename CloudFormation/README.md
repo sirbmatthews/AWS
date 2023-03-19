@@ -1,0 +1,1 @@
+# This repository contains CloudFormation Sample Templates
