@@ -1,0 +1,1 @@
+# This repository contains Typescript CDK Sample Projects
