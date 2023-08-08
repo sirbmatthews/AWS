@@ -159,6 +159,9 @@ coverage/
 cdk.context.json
 .cdk.staging/
 cdk.out/
+tests/
+requirements-dev.txt
+*.bat
 
 # More Git Ignores
 .gitignore
