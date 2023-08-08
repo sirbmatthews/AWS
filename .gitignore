@@ -159,3 +159,6 @@ coverage/
 cdk.context.json
 .cdk.staging/
 cdk.out/
+
+# More Git Ignores
+.gitignore
