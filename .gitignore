@@ -162,6 +162,9 @@ cdk.out/
 tests/
 requirements-dev.txt
 *.bat
+*-lock.*
+.npm*
+jest.config.js
 
 # More Git Ignores
 .gitignore
