@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation Template to create an S3 bucket with Deletion Policy set to Retain
+
+Parameters:
+  AccessControl:
+    Description: Predefined permissions for the Bucket
+    Type: String
+    Default: Private
+    AllowedValues: [Private, PublicRead, PublicReadWrite, AuthenticatedRead, LogDeliveryWrite, BucketOwnerRead, BucketOwnerFullControl, or AwsExecRead]
+
+  BucketName:
+    Description: Unique name of the S3 bucket
+    Type: String
+    AllowedPattern: ^((?!xn--)(?!.*-s3alias$)[a-z0-9][a-z0-9-]{1,61}[a-z0-9])$
+
+Resources:
+  BucketName:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: !Ref AccessControl
+      BucketName: !Ref BucketName
+    DeletionPolicy: Retain
