@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS CloudFormation Template to create an EC2 Instance and a Security Group
+
+Parameters:
+  ImageId:
+    Description: Amazon Machine Image ID
+    Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+
+  KeyName:
+    Description: Name of an existing EC2 KeyPair to enable SSH access to the Instance
+    Type: AWS::EC2::KeyPair::KeyName
+
+  InstanceType:
+    Description: EC2 Instance Type
+    Default: t2.micro
+    Type: String
+
+Resources:
+  Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref ImageId
+      InstanceType: !Ref InstanceType
+      SecurityGroups: [!Ref SecurityGroup]
+      KeyName: !Ref KeyName
+
+
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+  
+Outputs:
+  InstanceId:
+    Description: Instance ID of the newly created EC2 Instance
+    Value: !Ref 'Instance'
+
+  AvailabilityZone:
+    Description: Availability Zone of the newly created EC2 Instance
+    Value: !GetAtt Instance.AvailabilityZone
+
+  PublicDNS:
+    Description: Public DNSName of the newly created EC2 Instance
+    Value: !GetAtt Instance.PublicDnsName
+
+  PublicIP:
+    Description: Public IP address of the newly created EC2 Instance
+    Value: !GetAtt Instance.PublicIp
