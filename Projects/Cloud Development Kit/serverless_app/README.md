@@ -1,0 +1,1 @@
+# Building a serverless application using Step Functions, API Gateway, Lambda and S3 in AWS
